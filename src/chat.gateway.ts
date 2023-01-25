@@ -1,12 +1,21 @@
-import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
+import {
+  MessageBody,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
+import { Server, WebSocket } from 'ws';
 
 @WebSocketGateway()
 export class ChatGateway {
   @WebSocketServer()
-  server;
+  server: Server;
 
   @SubscribeMessage('message')
-  handleMessage(@MessageBody() message: string): void {
-    this.server.emit('message', message);
+  handleMessage(client: WebSocket, data: any): void {
+    console.log(data);
+    this.server.clients.forEach((client) => {
+      client.send(data);
+    });
   }
 }
