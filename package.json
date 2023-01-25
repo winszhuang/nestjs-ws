@@ -71,5 +71,10 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">= 16.10.0",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   }
 }
